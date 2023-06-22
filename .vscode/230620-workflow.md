@@ -16,12 +16,14 @@
     $ django-admin startproject mysite
 
 # В дальнешем следует применить нижеуказанную команду для формирования перечня зависимостей проекта, который выкладывается на GitHub
-    $ python -m pip freeze
+    $ python -m pip freeze > requirements.txt
 # Ссылка на офифиальную документацию: https://pip.pypa.io/en/stable/cli/pip_freeze/
+    $ pip install -r requirements.txt
+# Если нужно быстро восстановить зависимости
 
 
 (my_env)$ cd mysite
-(my_env)$ python manage.py migrate
+(my_env)$ python ./mysite/manage.py migrate
 # это применяемые веб-фреймворком Django миграции базы данных. В результате применения изначальных настроек в базе данных создаются таблицы для приложений, перечисленных в на строечном параметре INSTALLED_APPS.
 # При применении миграций, Django будет создавать таблицу по каждой модели, определенной в файле models.py приложения.
     
