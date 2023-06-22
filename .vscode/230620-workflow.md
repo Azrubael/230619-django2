@@ -36,7 +36,7 @@ Django version 4.1.9, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 
-# Сервер разработки можно выполнять на конкретно-прикладном хосте и порту либо сообщать Django, что нужно загружать определенный настро ечный файл, как показано ниже:
+# Сервер разработки можно выполнять на конкретно-прикладном хосте и порту либо сообщать Django, что нужно загружать определенный настроечный файл, как показано ниже:
 (my_env)$ python manage.py runserver 127.0.0.1:8001 --settings=mysite.settings
     
     
