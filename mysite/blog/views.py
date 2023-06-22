@@ -2,7 +2,17 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.core.paginator import Paginator, EmptyPage,\
         PageNotAnInteger
+from django.views.generic import ListView
 from django.http import Http404
+
+
+class PostListView(ListView):
+    """Альтернативное представление списка постов"""
+    queryset = Post.published.all()
+    context_object_name = 'posts'
+    paginate_by = 3
+    template_name = 'blog/post/listView.html'
+
 
 def post_list(request):
     """Представление post_list принимает объект request в качестве единственного параметра."""
