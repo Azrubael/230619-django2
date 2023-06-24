@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
-from django.core.paginator import Paginator, EmptyPage,\
-        PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 from django.views.generic import ListView
 from django.http import Http404
+from .forms import EmailPostForm
 
 
 class PostListView(ListView):
@@ -57,3 +58,20 @@ def post_detail(request, year, month, day, post):
     return render(request,
         'blog/post/detail.html',
         {'post': post})
+
+
+def post_share(request, post_id):
+    """Генерирование формы электронного письма"""
+    # Извлечь пост по id
+    post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
+    if request.method == 'POST':
+        # Фотма была передана на обработку
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            # Поля формы успешно прошли валидацию
+            cd = form.cleaned_data
+            # ...отправить электронное письмо
+    else:
+        form = EmailPostForm()
+    return render(request, 'blog/post/share.html',\
+            {'post': post, 'form': form})
